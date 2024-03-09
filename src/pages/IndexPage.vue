@@ -1,44 +1,57 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <example-component title="Example component" active :todos="todos" :meta="meta"></example-component>
+    <div class="container q-gutter-x-lg">
+      <report-list :weekReports="weekReports" @report-clicked="handleReportClicked" />
+      <create-report @report-created="handleReportCreated" />
+    </div>
   </q-page>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
+import { useWeekReportStore } from 'src/stores/weekReport';
+import WeekReport from 'src/data/models/WeekReport';
+import ReportList from 'src/components/ReportList.vue';
+import CreateReport from 'src/components/CreateReport.vue';
 
 export default defineComponent({
-  name: 'IndexPage',
-  components: { ExampleComponent },
+  components: {
+    ReportList,
+    CreateReport,
+  },
   setup() {
-    const todos = ref<Todo[]>([
-      {
-        id: 1,
-        content: 'ct1',
-      },
-      {
-        id: 2,
-        content: 'ct2',
-      },
-      {
-        id: 3,
-        content: 'ct3',
-      },
-      {
-        id: 4,
-        content: 'ct4',
-      },
-      {
-        id: 5,
-        content: 'ct5',
-      },
-    ]);
-    const meta = ref<Meta>({
-      totalCount: 1200,
-    });
-    return { todos, meta };
+    const store = useWeekReportStore();
+
+    return {
+      // Expose the store for use in the template if needed
+      weekReports: store.weekReports,
+    };
+  },
+  methods: {
+    openReport(report: WeekReport) {
+      this.$router.push({ name: 'VerslagPage', query: { reportId: report.id } });
+    },
+
+    handleReportClicked(report: WeekReport) {
+      this.openReport(report);
+    },
+    handleReportCreated(report: WeekReport) {
+      console.log('Report created:', report);
+    },
   },
 });
 </script>
+
+<style scoped>
+.container {
+  display: flex;
+  width: 1000px;
+  height: 600px;
+}
+
+.container > * {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+}
+</style>
