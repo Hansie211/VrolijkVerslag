@@ -3,7 +3,7 @@ import { mockUuid as uuid } from 'src/data/mock-uuid';
 
 export class DayReport {
   description = '';
-  images: MediaImage[] = [];
+  images: string[] = [];
 }
 export default class WeekReport {
   theme: string;
@@ -22,7 +22,7 @@ export default class WeekReport {
     this.startDate = startDate;
 
     this.dayReports = {};
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 5; i++) {
       this.dayReports[i] = new DayReport();
     }
   }

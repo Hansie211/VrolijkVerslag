@@ -23,8 +23,7 @@ export default defineComponent({
     const store = useWeekReportStore();
 
     return {
-      // Expose the store for use in the template if needed
-      weekReports: store.weekReports,
+      store,
     };
   },
   methods: {
@@ -36,7 +35,13 @@ export default defineComponent({
       this.openReport(report);
     },
     handleReportCreated(report: WeekReport) {
-      console.log('Report created:', report);
+      this.store.addReport(report);
+    },
+  },
+
+  computed: {
+    weekReports() {
+      return [...this.store.weekReports].sort((a, b) => b.startDate.getTime() - a.startDate.getTime());
     },
   },
 });

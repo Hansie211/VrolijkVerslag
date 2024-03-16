@@ -1,6 +1,9 @@
 import { store } from 'quasar/wrappers';
 import { createPinia } from 'pinia';
 import { Router } from 'vue-router';
+import { createPersistedStatePlugin } from 'pinia-plugin-persistedstate-2';
+
+import localforage from 'localforage';
 
 /*
  * When adding new properties to stores, you should also
@@ -24,6 +27,21 @@ declare module 'pinia' {
 
 export default store((/* { ssrContext } */) => {
   const pinia = createPinia();
+
+  const installPersistedStatePlugin = createPersistedStatePlugin({
+    storage: {
+      getItem: async (key) => {
+        return localforage.getItem(key);
+      },
+      setItem: async (key, value) => {
+        return localforage.setItem(key, value);
+      },
+      removeItem: async (key) => {
+        return localforage.removeItem(key);
+      },
+    },
+  });
+  pinia.use((context) => installPersistedStatePlugin(context));
 
   // You can add Pinia plugins here
   // pinia.use(SomePiniaPlugin)

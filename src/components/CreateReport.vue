@@ -12,7 +12,7 @@
 
     <!-- Date picker -->
     <div class="row">
-      <q-date v-model="startDate" :input="true" landscape mask="YYYY-MM-DD" :emit-model-value="true" picker="calendar" @input="handleInput" :options="(date) => new Date(date).getDay() === 1" label="Start Date" class="col" />
+      <q-date v-model="startDate" :input="true" landscape mask="YYYY-MM-DD" :emit-model-value="true" picker="calendar" :options="(date) => new Date(date).getDay() === 1" label="Start Date" class="col" />
     </div>
 
     <!-- Create button -->
@@ -22,14 +22,17 @@
   </div>
 </template>
 
-<script>
-import { ref } from 'vue';
+<script lang="ts">
+import WeekReport from 'src/data/models/WeekReport';
+import { Ref, defineComponent, ref } from 'vue';
 
-export default {
+export default defineComponent({
   setup(props, { emit }) {
     const theme = ref('');
-    const startDate = ref(getLastMonday());
+    const startDate: Ref<string> = ref(getLastMonday());
     const isThemeSet = ref(true);
+
+    console.log(startDate.value);
 
     const createReport = () => {
       if (!theme.value) {
@@ -39,10 +42,9 @@ export default {
 
       isThemeSet.value = true;
 
-      const report = {
-        theme: theme.value,
-        startDate: startDate.value,
-      };
+      const [year, month, day] = startDate.value.split('-');
+
+      const report = WeekReport.create(theme.value, new Date(parseInt(year), parseInt(month) - 1, parseInt(day)));
       emit('report-created', report);
     };
 
@@ -53,9 +55,9 @@ export default {
       createReport,
     };
   },
-};
+});
 
-function getLastMonday() {
+function getLastMonday(): string {
   const today = new Date();
   const dayOfWeek = today.getDay();
   const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Adjust if Sunday

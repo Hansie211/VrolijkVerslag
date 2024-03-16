@@ -9,6 +9,7 @@
     </q-header>
 
     <q-page-container>
+      <div id="debug-banner">DEBUG</div>
       <router-view />
     </q-page-container>
   </q-layout>
@@ -33,3 +34,21 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+#debug-banner {
+  width: 200px;
+  font-weight: bold;
+  color: white;
+  background-color: red;
+  text-align: center;
+  border: 2px solid gold;
+  rotate: 45deg;
+  position: absolute;
+  font-size: 1.6em;
+
+  top: 40px;
+  right: -45px;
+  z-index: 2000;
+}
+</style>
