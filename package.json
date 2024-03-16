@@ -18,6 +18,9 @@
     "core-js": "^3.6.5",
     "date-fns": "^3.3.1",
     "dom-to-pdf": "^0.3.2",
+    "dompurify": "^3.0.9",
+    "html2canvas": "^1.4.1",
+    "html3pdf": "^0.12.2",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "pinia": "^2.0.11",
@@ -36,7 +39,8 @@
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "raw-loader": "^4.0.2"
   },
   "browserslist": [
     "last 10 Chrome versions",

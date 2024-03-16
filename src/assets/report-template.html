@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      @page {
+        size: 210mm 297mm;
+        margin: 16mm;
+      }
+
+      body {
+        font-family: Tahoma, sans-serif;
+        font-size: 18pt;
+      }
+
+      .day-title:not(:nth-of-type(1)) {
+        page-break-before: always;
+      }
+
+      .text-box {
+        margin-bottom: 18px;
+      }
+
+      img {
+        height: 13cm;
+        margin-top: 2mm;
+        margin-bottom: 2mm;
+        object-fit: contain;
+      }
+
+      p,
+      img {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      .img-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+    <title>Week %WEEKNUMBER% - %THEME%</title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="https://raw.githubusercontent.com/davidnbooth/html3pdf.js/merge_PRs/src/index.js"></script> -->
+    <script type="module">
+      import html2pdf from 'https://raw.githubusercontent.com/davidnbooth/html3pdf.js/merge_PRs/src/index.js';
+      addEventListener('load', (event) => {
+        alert('OK');
+        html2pdf(document.body);
+      });
+    </script>
+    <script></script>
+  </head>
+  <body>
+    <h2>Week %WEEKNUMBER% - %THEME%</h2>
+
+    <div style="height: 10px"></div>
+
+    <h3 class="day-title">Maandag</h3>
+    <div class="text-box">%TEXT_DAY_0%</div>
+    <div class="img-box">%IMG_DAY_0%</div>
+
+    <h3 class="day-title">Dinsdag</h3>
+    <div class="text-box">%TEXT_DAY_1%</div>
+    <div class="img-box">%IMG_DAY_1%</div>
+
+    <h3 class="day-title">Woensdag</h3>
+    <div class="text-box">%TEXT_DAY_2%</div>
+    <div class="img-box">%IMG_DAY_2%</div>
+
+    <h3 class="day-title">Donderdag</h3>
+    <div class="text-box">%TEXT_DAY_3%</div>
+    <div class="img-box">%IMG_DAY_3%</div>
+
+    <h3 class="day-title">Vrijdag</h3>
+    <div class="text-box">%TEXT_DAY_4%</div>
+    <div class="img-box">%IMG_DAY_4%</div>
+  </body>
+</html>

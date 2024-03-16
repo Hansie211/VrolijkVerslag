@@ -1,5 +1,6 @@
 <template>
   <q-page padding style="display: flex; justify-content: center; width: 100%">
+    <iframe></iframe>
     <div style="width: 80%; min-width: 1000px; height: 100%; display: flex; flex-direction: column">
       <div class="flex row q-pa-sm q-gutter-x-md">
         <q-btn to="/" icon="home" rounded />
@@ -10,7 +11,7 @@
           </q-popup-edit>
         </div>
         <q-space />
-        <q-btn icon="print" :to="{ name: 'ExportPage', query: { reportId: report.id } }" />
+        <q-btn icon="print" @click="doExport" />
       </div>
 
       <q-carousel v-model="slide" transition-prev="slide-right" transition-next="slide-left" control-color="primary" class="rounded-borders" arrows style="width: 100%; height: 100%">
@@ -42,6 +43,7 @@ import { useWeekReportStore } from 'src/stores/weekReport';
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getISOWeek } from 'date-fns';
+import html2pdf from 'html3pdf';
 
 export default defineComponent({
   name: 'VerslagPage',
@@ -81,32 +83,67 @@ export default defineComponent({
       day.images.splice(index, 1);
     },
 
-    onPaste(evt: ClipboardEvent, dayIndex: number) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const editorRef = (this.$refs as unknown as any)[`editorRef_${dayIndex}`][0];
+    async doExport() {
+      const vars: { [key: string]: string | number | Array<string> } = {
+        theme: this.report.theme,
+        weekNumber: getISOWeek(this.report.startDate),
+      };
 
-      if ((evt.target as HTMLElement)?.nodeName === 'INPUT') return;
-      let text: string | undefined, onPasteStripFormattingIEPaste: boolean | undefined;
-
-      evt.preventDefault();
-      evt.stopPropagation();
-
-      if (evt.clipboardData?.getData) {
-        text = evt.clipboardData.getData('text/plain');
-        if (editorRef && editorRef.runCmd) {
-          editorRef.runCmd('insertText', text);
-        }
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } else if ('clipboardData' in window && (window as any).clipboardData.getData) {
-        if (!onPasteStripFormattingIEPaste) {
-          onPasteStripFormattingIEPaste = true;
-          if (editorRef && editorRef.runCmd) {
-            editorRef.runCmd('ms-pasteTextOnly', text);
-          }
-        }
-        onPasteStripFormattingIEPaste = false;
+      for (let i = 0; i < 5; i++) {
+        vars['text_day_' + i] = this.paragraphs(this.report.dayReports[i].description).map((txt) => `<p>${txt}</p>`);
+        vars['img_day_' + i] = this.report.dayReports[i].images.map((img) => `<img src="${img}" />`);
       }
+
+      let html = require('../assets/report-template.html').default as string;
+      Object.keys(vars).forEach((key) => {
+        const value = vars[key];
+        html = html.replaceAll(`%${key.toUpperCase()}%`, Array.isArray(value) ? value.join('') : value.toString());
+      });
+
+      // const byte = await HTMLtoDOCX(html, null, {});
+
+      var bl = new Blob([html], { type: 'text/html' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(bl);
+      a.download = 'your-download-name-here.html';
+      a.hidden = true;
+      document.body.appendChild(a);
+      a.innerHTML = "something random - nobody will see this, it doesn't matter what you put here";
+      a.click();
+
+      // var uri = 'data:text/html,' + encodeURIComponent(html);
+      // var newWindow = window.open(uri);
+
+      // return;
+
+      // const iframe = document.querySelector('iframe');
+      // if (iframe == null) throw new Error();
+      // const doc = iframe.contentDocument;
+      // if (doc == null) throw new Error();
+      // doc.open();
+      // doc.write(html);
+      // doc.close();
+
+      // iframe.addEventListener('load', function () {
+      //   // var element = iframe?.contentWindow?.document.body; //document.getElementById('element-to-print');
+      //   // var opt = {
+      //   //   margin: 1,
+      //   //   filename: 'myfile.pdf',
+      //   //   image: { type: 'jpeg', quality: 0.98 },
+      //   //   html2canvas: { scale: 2 },
+      //   //   jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+      //   // };
+      //   // New Promise-based usage:
+      //   //html2pdf().set(opt).from(element).save();
+      //   //(iframe?.contentWindow as any)?.html2pdf(iframe?.contentWindow?.document.body);
+      // });
+    },
+
+    paragraphs(text: string): string[] {
+      return text
+        .trim()
+        .replace(/\n\s*\n/g, '\n')
+        .split('\n');
     },
 
     async handleFileUpload(index: number, event: Event & { target: HTMLInputElement & EventTarget }) {
@@ -124,13 +161,11 @@ export default defineComponent({
 
       console.log('update', files);
 
-      for (let i = 0; i < files.length && day.images.length < 10; i++) {
+      for (let i = 0; i < files.length && day.images.length < 20; i++) {
         const fileData = await resizeImage(files[i], 1280, 720);
         if (fileData === null) {
           console.log('Failed', i);
         }
-
-        console.log(day.images.length, day.images.length < 10);
 
         day.images.push(await readFile(fileData as Blob));
       }
@@ -139,6 +174,8 @@ export default defineComponent({
 });
 
 function readFile(file: Blob): Promise<string> {
+  // return Promise.resolve(URL.createObjectURL(file));
+
   return new Promise((resolv) => {
     const reader = new FileReader();
 

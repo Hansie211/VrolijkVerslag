@@ -54,6 +54,10 @@ module.exports = configure(function (ctx) {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
       distDir: 'docs/',
 
+      extendWebpack(cfg, { isServer, isClient }) {
+        cfg.module.rules.push({ test: /-template\.html$/i, use: 'raw-loader' });
+      },
+
       // transpile: false,
       // publicPath: '/',
 

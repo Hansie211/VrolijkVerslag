@@ -1,5 +1,4 @@
-//import { v4 as uuid } from 'uuid';
-import { mockUuid as uuid } from 'src/data/mock-uuid';
+import { v4 as uuid } from 'uuid';
 
 export class DayReport {
   description = '';
