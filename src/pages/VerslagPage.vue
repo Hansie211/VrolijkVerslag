@@ -1,6 +1,5 @@
 <template>
   <q-page padding style="display: flex; justify-content: center; width: 100%">
-    <iframe></iframe>
     <div style="width: 80%; min-width: 1000px; height: 100%; display: flex; flex-direction: column">
       <div class="flex row q-pa-sm q-gutter-x-md">
         <q-btn to="/" icon="home" rounded />
@@ -14,10 +13,10 @@
         <q-btn icon="print" @click="doExport" />
       </div>
 
-      <q-carousel v-model="slide" transition-prev="slide-right" transition-next="slide-left" control-color="primary" class="rounded-borders" arrows style="width: 100%; height: 100%">
+      <q-carousel v-model="slide" transition-prev="slide-right" transition-next="slide-left" control-color="primary" class="rounded-borders" arrows style="width: 100%; height: 100%" padding>
         <q-carousel-slide v-for="(day, dayIndex) in Object.values(report.dayReports)" :key="dayIndex" :name="dayIndex" style="width: 100%; height: 100%; display: flex; flex-direction: column">
           <form autocorrect="on" autocapitalize="on" autocomplete="off" spellcheck="true" style="height: 100%">
-            <q-input v-model="day.description" type="textarea" debounce="300" style="height: 100%; font-size: 14pt; font-family: Tahoma, sans-serif; line-height: 1.2" class="q-mx-xl" input-style="height: 100%" outlined />
+            <q-input v-model="day.description" type="textarea" debounce="300" style="height: 100%; font-size: 14pt; font-family: Tahoma, sans-serif; line-height: 1.2" input-style="height: 100%" outlined />
           </form>
 
           <div class="q-my-md q-px-md q-gutter-x-sm" style="height: 200px; display: flex; flex-wrap: nowrap; white-space: nowrap; overflow-x: auto; align-items: center; gap: 5px; flex-grow: 0; flex-shrink: 0">
@@ -43,7 +42,6 @@ import { useWeekReportStore } from 'src/stores/weekReport';
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getISOWeek } from 'date-fns';
-import html2pdf from 'html3pdf';
 
 export default defineComponent({
   name: 'VerslagPage',
@@ -100,43 +98,16 @@ export default defineComponent({
         html = html.replaceAll(`%${key.toUpperCase()}%`, Array.isArray(value) ? value.join('') : value.toString());
       });
 
-      // const byte = await HTMLtoDOCX(html, null, {});
+      html = `To: Example\nSubject: Verslag week ${getISOWeek(this.report.startDate)} - ${this.report.theme}\nX-Unsent: 1\nContent-Type: text/html\n\n` + html;
 
-      var bl = new Blob([html], { type: 'text/html' });
+      var bl = new Blob([html], { type: 'text/plain' });
       var a = document.createElement('a');
       a.href = URL.createObjectURL(bl);
-      a.download = 'your-download-name-here.html';
+      a.download = `Verslag week ${getISOWeek(this.report.startDate)} - ${this.report.theme}.eml`;
       a.hidden = true;
+      // a.target = '_blank';
       document.body.appendChild(a);
-      a.innerHTML = "something random - nobody will see this, it doesn't matter what you put here";
       a.click();
-
-      // var uri = 'data:text/html,' + encodeURIComponent(html);
-      // var newWindow = window.open(uri);
-
-      // return;
-
-      // const iframe = document.querySelector('iframe');
-      // if (iframe == null) throw new Error();
-      // const doc = iframe.contentDocument;
-      // if (doc == null) throw new Error();
-      // doc.open();
-      // doc.write(html);
-      // doc.close();
-
-      // iframe.addEventListener('load', function () {
-      //   // var element = iframe?.contentWindow?.document.body; //document.getElementById('element-to-print');
-      //   // var opt = {
-      //   //   margin: 1,
-      //   //   filename: 'myfile.pdf',
-      //   //   image: { type: 'jpeg', quality: 0.98 },
-      //   //   html2canvas: { scale: 2 },
-      //   //   jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-      //   // };
-      //   // New Promise-based usage:
-      //   //html2pdf().set(opt).from(element).save();
-      //   //(iframe?.contentWindow as any)?.html2pdf(iframe?.contentWindow?.document.body);
-      // });
     },
 
     paragraphs(text: string): string[] {
@@ -174,8 +145,6 @@ export default defineComponent({
 });
 
 function readFile(file: Blob): Promise<string> {
-  // return Promise.resolve(URL.createObjectURL(file));
-
   return new Promise((resolv) => {
     const reader = new FileReader();
 
