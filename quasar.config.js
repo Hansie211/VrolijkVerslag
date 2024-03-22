@@ -55,7 +55,7 @@ module.exports = configure(function (ctx) {
       distDir: 'docs/',
 
       extendWebpack(cfg, { isServer, isClient }) {
-        cfg.module.rules.push({ test: /-template\.html$/i, use: 'raw-loader' });
+        cfg.module.rules.push({ test: /-template\.html$|\.xml$|\.rels$/i, use: 'raw-loader' });
       },
 
       // transpile: false,

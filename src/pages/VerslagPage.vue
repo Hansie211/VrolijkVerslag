@@ -4,7 +4,7 @@
       <div class="flex row q-pa-sm q-gutter-x-md">
         <q-btn to="/" icon="home" rounded />
         <div class="text-h3" style="flex-shrink: 0; flex-grow: 0">
-          <span style="font-size: 0.6em">Week {{ getISOWeek(report.startDate) }}</span> - {{ report.theme }} - <span style="font-size: 0.6em">{{ getWeekDay(slide) }}</span>
+          <span style="font-size: 0.6em">Week {{ getISOWeek(report.startDate) }}</span> - {{ report.theme }} - <span style="font-size: 0.6em">{{ getWeekDay(currentDay) }}</span>
           <q-popup-edit v-model="report.theme" buttons v-slot="scope">
             <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
           </q-popup-edit>
@@ -13,7 +13,7 @@
         <q-btn icon="print" @click="doExport" />
       </div>
 
-      <q-carousel v-model="slide" transition-prev="slide-right" transition-next="slide-left" control-color="primary" class="rounded-borders" arrows style="width: 100%; height: 100%" padding>
+      <q-carousel v-model="currentDay" transition-prev="slide-right" transition-next="slide-left" control-color="primary" class="rounded-borders" arrows style="width: 100%; height: 100%" padding>
         <q-carousel-slide v-for="(day, dayIndex) in Object.values(report.dayReports)" :key="dayIndex" :name="dayIndex" style="width: 100%; height: 100%; display: flex; flex-direction: column">
           <form autocorrect="on" autocapitalize="on" autocomplete="off" spellcheck="true" style="height: 100%">
             <q-input v-model="day.description" type="textarea" debounce="300" style="height: 100%; font-size: 14pt; font-family: Tahoma, sans-serif; line-height: 1.2" input-style="height: 100%" outlined />
@@ -42,6 +42,10 @@ import { useWeekReportStore } from 'src/stores/weekReport';
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getISOWeek } from 'date-fns';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
+import getEnvironmentProperties from 'src/data/EnvironmentProperties';
+import getApplicationProperties, { getProperty } from 'src/data/ApplicationProperties';
 
 export default defineComponent({
   name: 'VerslagPage',
@@ -59,9 +63,15 @@ export default defineComponent({
     return {
       weekReportStore,
       report,
-      slide: ref(0),
+      currentDay: ref(0),
       getISOWeek,
     };
+  },
+
+  computed: {
+    maxImagesPerDay(): number {
+      return getProperty('maxImagesPerDay', 10);
+    },
   },
 
   methods: {
@@ -92,22 +102,57 @@ export default defineComponent({
         vars['img_day_' + i] = this.report.dayReports[i].images.map((img) => `<img src="${img}" />`);
       }
 
-      let html = require('../assets/report-template.html').default as string;
+      let html = require('src/assets/document/report-template.html').default as string;
       Object.keys(vars).forEach((key) => {
         const value = vars[key];
         html = html.replaceAll(`%${key.toUpperCase()}%`, Array.isArray(value) ? value.join('') : value.toString());
       });
 
-      html = `To: Example\nSubject: Verslag week ${getISOWeek(this.report.startDate)} - ${this.report.theme}\nX-Unsent: 1\nContent-Type: text/html\n\n` + html;
+      const zip = new JSZip();
 
-      var bl = new Blob([html], { type: 'text/plain' });
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(bl);
-      a.download = `Verslag week ${getISOWeek(this.report.startDate)} - ${this.report.theme}.eml`;
-      a.hidden = true;
-      // a.target = '_blank';
-      document.body.appendChild(a);
-      a.click();
+      const files: { [key: string]: string } = {
+        '_rels/.rels': require('src/assets/document/word/_rels/.rels').default as string,
+        'docProps/app.xml': require('src/assets/document/word/docProps/app.xml').default as string,
+        'docProps/core.xml': require('src/assets/document/word/docProps/core.xml').default as string,
+        'word/_rels/document.xml.rels': require('src/assets/document/word/word/_rels/document.xml.rels').default as string,
+        'word/theme/theme1.xml': require('src/assets/document/word/word/theme/theme1.xml').default as string,
+        'word/document.xml': require('src/assets/document/word/word/document.xml').default as string,
+        'word/fontTable.xml': require('src/assets/document/word/word/fontTable.xml').default as string,
+        'word/settings.xml': require('src/assets/document/word/word/settings.xml').default as string,
+        'word/styles.xml': require('src/assets/document/word/word/styles.xml').default as string,
+        'word/webSettings.xml': require('src/assets/document/word/word/webSettings.xml').default as string,
+        '[Content_Types].xml': require('src/assets/document/word/[Content_Types].xml').default as string,
+      };
+
+      const addB64 = (name: string, uri: string) => {
+        const idx = uri.indexOf('base64,') + 'base64,'.length;
+        const content = uri.substring(idx);
+        zip.file(name, content, { base64: true });
+      };
+
+      Object.keys(files).forEach((fname) => {
+        const content = files[fname];
+        zip.file(fname, content);
+      });
+
+      addB64('word/media/image1.jpeg', this.report.dayReports[0].images[0]);
+      addB64('word/media/image2.jpeg', this.report.dayReports[0].images[1]);
+
+      zip.generateAsync({ type: 'blob', compression: 'STORE' }).then(function (content) {
+        // see FileSaver.js
+        saveAs(content, 'word.docx');
+      });
+
+      // html = `To: Example\nSubject: Verslag week ${getISOWeek(this.report.startDate)} - ${this.report.theme}\nX-Unsent: 1\nContent-Type: text/html\n\n` + html;
+
+      // var bl = new Blob([html], { type: 'text/plain' });
+      // var a = document.createElement('a');
+      // a.href = URL.createObjectURL(bl);
+      // a.download = `Verslag week ${getISOWeek(this.report.startDate)} - ${this.report.theme}.eml`;
+      // a.hidden = true;
+      // // a.target = '_blank';
+      // document.body.appendChild(a);
+      // a.click();
     },
 
     paragraphs(text: string): string[] {
@@ -120,19 +165,17 @@ export default defineComponent({
     async handleFileUpload(index: number, event: Event & { target: HTMLInputElement & EventTarget }) {
       const files: FileList | null = event.target.files;
 
+      // Clear the input
       event.target.type = 'text';
       event.target.type = 'file';
 
       if (!files) {
-        console.log('no files');
         return;
       }
 
       const day = this.report.dayReports[index];
 
-      console.log('update', files);
-
-      for (let i = 0; i < files.length && day.images.length < 20; i++) {
+      for (let i = 0; i < files.length && day.images.length < this.maxImagesPerDay; i++) {
         const fileData = await resizeImage(files[i], 1280, 720);
         if (fileData === null) {
           console.log('Failed', i);
@@ -186,7 +229,7 @@ function resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<B
 
       let context = canvas.getContext('2d');
       if (context === null) {
-        resolve(null);
+        reject(null);
         return;
       }
 
