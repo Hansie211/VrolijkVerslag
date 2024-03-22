@@ -5,6 +5,14 @@
     <w:defaultTabStop w:val="708" />
     <w:hyphenationZone w:val="425" />
     <w:characterSpacingControl w:val="doNotCompress" />
+    <w:footnotePr>
+        <w:footnote w:id="-1" />
+        <w:footnote w:id="0" />
+    </w:footnotePr>
+    <w:endnotePr>
+        <w:endnote w:id="-1" />
+        <w:endnote w:id="0" />
+    </w:endnotePr>
     <w:compat>
         <w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15" />
         <w:compatSetting w:name="overrideTableStyleFontSizeAndJustification" w:uri="http://schemas.microsoft.com/office/word" w:val="1" />
@@ -15,9 +23,12 @@
     </w:compat>
     <w:rsids>
         <w:rsidRoot w:val="00D27C7A" />
+        <w:rsid w:val="000010FB" />
         <w:rsid w:val="000D11EA" />
+        <w:rsid w:val="007E2299" />
         <w:rsid w:val="008D103B" />
         <w:rsid w:val="009003F3" />
+        <w:rsid w:val="00B61BA9" />
         <w:rsid w:val="00D27C7A" />
         <w:rsid w:val="00E86FC8" />
     </w:rsids>

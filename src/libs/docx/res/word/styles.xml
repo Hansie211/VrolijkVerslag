@@ -402,7 +402,6 @@
     <w:style w:type="character" w:default="1" w:styleId="Standaardalinea-lettertype">
         <w:name w:val="Default Paragraph Font" />
         <w:uiPriority w:val="1" />
-        <w:semiHidden />
         <w:unhideWhenUsed />
     </w:style>
     <w:style w:type="table" w:default="1" w:styleId="Standaardtabel">
@@ -474,5 +473,113 @@
             <w:szCs w:val="18" />
             <w:lang w:eastAsia="ja-JP" />
         </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Koptekst">
+        <w:name w:val="header" />
+        <w:basedOn w:val="Standaard" />
+        <w:link w:val="KoptekstChar" />
+        <w:uiPriority w:val="99" />
+        <w:unhideWhenUsed />
+        <w:rsid w:val="007E2299" />
+        <w:pPr>
+            <w:tabs>
+                <w:tab w:val="center" w:pos="4513" />
+                <w:tab w:val="right" w:pos="9026" />
+            </w:tabs>
+            <w:spacing w:after="0" w:line="240" w:lineRule="auto" />
+        </w:pPr>
+    </w:style>
+    <w:style w:type="character" w:customStyle="1" w:styleId="KoptekstChar">
+        <w:name w:val="Koptekst Char" />
+        <w:basedOn w:val="Standaardalinea-lettertype" />
+        <w:link w:val="Koptekst" />
+        <w:uiPriority w:val="99" />
+        <w:rsid w:val="007E2299" />
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Voettekst">
+        <w:name w:val="footer" />
+        <w:basedOn w:val="Standaard" />
+        <w:link w:val="VoettekstChar" />
+        <w:uiPriority w:val="99" />
+        <w:unhideWhenUsed />
+        <w:rsid w:val="007E2299" />
+        <w:pPr>
+            <w:tabs>
+                <w:tab w:val="center" w:pos="4513" />
+                <w:tab w:val="right" w:pos="9026" />
+            </w:tabs>
+            <w:spacing w:after="0" w:line="240" w:lineRule="auto" />
+        </w:pPr>
+    </w:style>
+    <w:style w:type="character" w:customStyle="1" w:styleId="VoettekstChar">
+        <w:name w:val="Voettekst Char" />
+        <w:basedOn w:val="Standaardalinea-lettertype" />
+        <w:link w:val="Voettekst" />
+        <w:uiPriority w:val="99" />
+        <w:rsid w:val="007E2299" />
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Titel">
+        <w:name w:val="Title" />
+        <w:basedOn w:val="Standaard" />
+        <w:next w:val="Standaard" />
+        <w:link w:val="TitelChar" />
+        <w:uiPriority w:val="10" />
+        <w:qFormat />
+        <w:rsid w:val="007E2299" />
+        <w:pPr>
+            <w:spacing w:after="0" w:line="240" w:lineRule="auto" />
+            <w:contextualSpacing />
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:asciiTheme="majorHAnsi" w:eastAsiaTheme="majorEastAsia" w:hAnsiTheme="majorHAnsi" w:cstheme="majorBidi" />
+            <w:spacing w:val="-10" />
+            <w:kern w:val="28" />
+            <w:sz w:val="56" />
+            <w:szCs w:val="56" />
+        </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:customStyle="1" w:styleId="TitelChar">
+        <w:name w:val="Titel Char" />
+        <w:basedOn w:val="Standaardalinea-lettertype" />
+        <w:link w:val="Titel" />
+        <w:uiPriority w:val="10" />
+        <w:rsid w:val="007E2299" />
+        <w:rPr>
+            <w:rFonts w:asciiTheme="majorHAnsi" w:eastAsiaTheme="majorEastAsia" w:hAnsiTheme="majorHAnsi" w:cstheme="majorBidi" />
+            <w:spacing w:val="-10" />
+            <w:kern w:val="28" />
+            <w:sz w:val="56" />
+            <w:szCs w:val="56" />
+        </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="Zwaar">
+        <w:name w:val="Strong" />
+        <w:basedOn w:val="Standaardalinea-lettertype" />
+        <w:uiPriority w:val="22" />
+        <w:qFormat />
+        <w:rsid w:val="007E2299" />
+        <w:rPr>
+            <w:b />
+            <w:bCs />
+        </w:rPr>
+    </w:style>
+    <w:style w:type="table" w:styleId="Tabelraster">
+        <w:name w:val="Table Grid" />
+        <w:basedOn w:val="Standaardtabel" />
+        <w:uiPriority w:val="39" />
+        <w:rsid w:val="007E2299" />
+        <w:pPr>
+            <w:spacing w:after="0" w:line="240" w:lineRule="auto" />
+        </w:pPr>
+        <w:tblPr>
+            <w:tblBorders>
+                <w:top w:val="single" w:sz="4" w:space="0" w:color="auto" />
+                <w:left w:val="single" w:sz="4" w:space="0" w:color="auto" />
+                <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto" />
+                <w:right w:val="single" w:sz="4" w:space="0" w:color="auto" />
+                <w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto" />
+                <w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto" />
+            </w:tblBorders>
+        </w:tblPr>
     </w:style>
 </w:styles>

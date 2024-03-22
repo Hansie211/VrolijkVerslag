@@ -1,253 +1,198 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14">
     <w:body>
-        <w:p w14:paraId="03EC5861" w14:textId="7875908C" w:rsidR="00E86FC8" w:rsidRDefault="00D27C7A">
+        <w:p w14:paraId="03EC5861" w14:textId="3E3DA291" w:rsidR="00E86FC8" w:rsidRPr="007E2299" w:rsidRDefault="007E2299" w:rsidP="007E2299">
             <w:pPr>
+                <w:pStyle w:val="Titel" />
                 <w:rPr>
-                    <w:b />
-                    <w:bCs />
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
                 </w:rPr>
             </w:pPr>
-            <w:proofErr w:type="spellStart" />
-            <w:r>
+            <w:r w:rsidRPr="007E2299">
                 <w:rPr>
-                    <w:b />
-                    <w:bCs />
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
                 </w:rPr>
-                <w:t>Weektheme</w:t>
+                <w:t>%TITLE%</w:t>
             </w:r>
-            <w:proofErr w:type="spellEnd" />
         </w:p>
-        <w:p w14:paraId="529207C3" w14:textId="77777777" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A">
+        <w:p w14:paraId="529207C3" w14:textId="77777777" w:rsidR="00D27C7A" w:rsidRPr="007E2299" w:rsidRDefault="00D27C7A">
             <w:pPr>
                 <w:rPr>
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
                     <w:b />
                     <w:bCs />
                 </w:rPr>
             </w:pPr>
         </w:p>
-        <w:p w14:paraId="14EB0E04" w14:textId="7ECFBA4B" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A">
+        <w:p w14:paraId="14EB0E04" w14:textId="7ECFBA4B" w:rsidR="00D27C7A" w:rsidRPr="007E2299" w:rsidRDefault="00D27C7A">
             <w:pPr>
                 <w:rPr>
-                    <w:b />
-                    <w:bCs />
+                    <w:rStyle w:val="Zwaar" />
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
+                    <w:sz w:val="28" />
+                    <w:szCs w:val="28" />
                 </w:rPr>
             </w:pPr>
-            <w:r>
+            <w:r w:rsidRPr="007E2299">
                 <w:rPr>
-                    <w:b />
-                    <w:bCs />
+                    <w:rStyle w:val="Zwaar" />
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
+                    <w:sz w:val="28" />
+                    <w:szCs w:val="28" />
                 </w:rPr>
                 <w:t>Maandag</w:t>
             </w:r>
         </w:p>
-        <w:p w14:paraId="3D06BBBD" w14:textId="4FEDC6A0" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A">
-            <w:r w:rsidRPr="00D27C7A">
-                <w:t>Op vrijdag, de laatste dag van de week, hebben we in onze kinderopvang een bijzondere dag gehad met activiteiten rondom het thema 'Familie'. Ter afsluiting van een leerzame en plezierige week stonden er verschillende leuke en stimulerende activiteiten op het programma om de kinderen te betrekken bij het onderwerp familie en om hen te laten genieten van de gezelligheid van samenzijn.</w:t>
-            </w:r>
+
+        %TEXT_DAY_0%
+
+        <w:p w14:paraId="0C34C389" w14:textId="6024F036" w:rsidR="00D27C7A" w:rsidRPr="007E2299" w:rsidRDefault="00D27C7A">
+            <w:pPr>
+                <w:rPr>
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
+                </w:rPr>
+            </w:pPr>
         </w:p>
-        <w:p w14:paraId="3D06BBBD" w14:textId="4FEDC6A0" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A">
-            <w:r w:rsidRPr="00D27C7A">
-                <w:t>De ochtend begon met een gezamenlijke groepsactiviteit waarbij de kinderen de kans kregen om een familieposter te maken. Met behulp van knutselmateriaal zoals gekleurd papier, stiften, stickers en glitter, hebben de kinderen creatieve en kleurrijke posters gemaakt waarop ze hun eigen familieleden hebben afgebeeld. Door te tekenen, knippen en plakken hebben de kinderen hun verbeelding de vrije loop gelaten en hun posters versierd met afbeeldingen van familieleden en huiselijke scènes.</w:t>
-            </w:r>
-        </w:p>
-        <w:p w14:paraId="3D06BBBD" w14:textId="4FEDC6A0" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A">
-            <w:r w:rsidRPr="00D27C7A">
-                <w:t>Na het maken van de familieposters namen we deel aan een educatieve activiteit waarbij de kinderen meer leerden over verschillende familierelaties en tradities. Samen met de begeleiders hebben ze gesproken over verschillende familievormen, zoals kerngezinnen, uitgebreide families en adoptiefamilies, en hebben ze ontdekt hoe families over de hele wereld verschillende tradities en gebruiken hebben. Door middel van gesprekken en voorbeelden hebben de kinderen meer begrip gekregen voor de diversiteit binnen families en hebben ze geleerd om respectvol om te gaan met verschillende achtergronden en levensstijlen.</w:t>
-            </w:r>
-        </w:p>
-        <w:p w14:paraId="3D06BBBD" w14:textId="4FEDC6A0" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A">
-            <w:r w:rsidRPr="00D27C7A">
-                <w:t>Na de educatieve activiteit was het tijd voor een ontspannende speelsessie waarbij de kinderen vrij konden spelen en sociale interacties konden hebben met hun vriendjes en vriendinnetjes. Met speelgoed en spelletjes zoals blokken, poppen, auto's en knuffels hebben de kinderen hun verbeelding gebruikt en hun sociale vaardigheden geoefend door samen te spelen en te delen met anderen. Door middel van spel en plezier hebben de kinderen genoten van elkaars gezelschap en hebben ze waardevolle vriendschappen opgebouwd.</w:t>
-            </w:r>
-        </w:p>
-        <w:p w14:paraId="3D06BBBD" w14:textId="4FEDC6A0" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A">
-            <w:r w:rsidRPr="00D27C7A">
-                <w:t>In de middag hebben we een afsluitende feestelijke activiteit gehad waarbij we samen hebben gezongen, gedanst en gelachen om de leuke herinneringen die we deze week hebben gemaakt. Met vrolijke muziek en feestelijke versieringen hebben de kinderen deelgenomen aan een mini-feestje waarbij ze konden genieten van lekkernijen zoals fruit, koekjes en sapjes. Door samen te vieren en te genieten van elkaars gezelschap hebben de kinderen een gevoel van saamhorigheid en verbondenheid ervaren, waardoor ze zich geliefd en gewaardeerd voelden.</w:t>
-            </w:r>
-        </w:p>
-        <w:p w14:paraId="3D06BBBD" w14:textId="4FEDC6A0" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A">
-            <w:r w:rsidRPr="00D27C7A">
-                <w:t>Het was een geweldige afsluiting van een inspirerende en plezierige week vol activiteiten rondom het thema 'Familie'. De kinderen hebben niet alleen veel geleerd over familiewaarden en relaties, maar hebben ook genoten van het samenzijn en de gezelligheid met hun vriendjes en vriendinnetjes. Met een glimlach op hun gezicht en warme herinneringen in hun hart kijken ze terug op een onvergetelijke week in onze kinderopvang.</w:t>
-            </w:r>
-        </w:p>
-        <w:p w14:paraId="3D06BBBD" w14:textId="4FEDC6A0" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A">
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="Tabelraster" />
+                <w:tblW w:w="0" w:type="auto" />
+                <w:tblBorders>
+                    <w:top w:val="none" w:sz="0" w:space="0" w:color="auto" />
+                    <w:left w:val="none" w:sz="0" w:space="0" w:color="auto" />
+                    <w:bottom w:val="none" w:sz="0" w:space="0" w:color="auto" />
+                    <w:right w:val="none" w:sz="0" w:space="0" w:color="auto" />
+                    <w:insideH w:val="none" w:sz="0" w:space="0" w:color="auto" />
+                    <w:insideV w:val="none" w:sz="0" w:space="0" w:color="auto" />
+                </w:tblBorders>
+                <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1" />
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="9026" />
+            </w:tblGrid>
+
+            %IMAGES_DAY_0%
+
+        </w:tbl>
+        <w:p w14:paraId="5F3E2787" w14:textId="04203A43" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A" />
+        <w:p w14:paraId="1EC16E4A" w14:textId="77777777" w:rsidR="007E2299" w:rsidRDefault="007E2299" />
+        <w:p w14:paraId="033A5F4B" w14:textId="33E1BF1C" w:rsidR="007E2299" w:rsidRDefault="007E2299" />
+        <w:p w14:paraId="766D736E" w14:textId="77777777" w:rsidR="007E2299" w:rsidRDefault="007E2299">
             <w:r>
-                <w:t>!!</w:t>
+                <w:br w:type="page" />
             </w:r>
         </w:p>
-        <w:p w14:paraId="74758167" w14:textId="79366E68" w:rsidR="00D27C7A" w:rsidRPr="00D27C7A" w:rsidRDefault="00D27C7A">
+        <w:p w14:paraId="7CCBF650" w14:textId="38C7CA7F" w:rsidR="007E2299" w:rsidRPr="007E2299" w:rsidRDefault="007E2299" w:rsidP="007E2299">
+            <w:pPr>
+                <w:rPr>
+                    <w:rStyle w:val="Zwaar" />
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
+                    <w:sz w:val="28" />
+                    <w:szCs w:val="28" />
+                </w:rPr>
+            </w:pPr>
             <w:r>
                 <w:rPr>
-                    <w:noProof />
+                    <w:rStyle w:val="Zwaar" />
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
+                    <w:sz w:val="28" />
+                    <w:szCs w:val="28" />
                 </w:rPr>
-                <w:drawing>
-                    <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="6BB99663" wp14:editId="38368AEB">
-                        <wp:extent cx="5724525" cy="3219450" />
-                        <wp:effectExtent l="0" t="0" r="9525" b="0" />
-                        <wp:docPr id="861653068" name="Afbeelding 1" />
-                        <wp:cNvGraphicFramePr>
-                            <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1" />
-                        </wp:cNvGraphicFramePr>
-                        <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
-                            <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                    <pic:nvPicPr>
-                                        <pic:cNvPr id="0" name="Picture 1" />
-                                        <pic:cNvPicPr>
-                                            <a:picLocks noChangeAspect="1" noChangeArrowheads="1" />
-                                        </pic:cNvPicPr>
-                                    </pic:nvPicPr>
-                                    <pic:blipFill>
-                                        <a:blip r:embed="rId14" cstate="print">
-                                            <a:extLst>
-                                                <a:ext uri="{28A0092B-C50C-407E-A947-70E740481C1C}">
-                                                    <a14:useLocalDpi xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" val="0" />
-                                                </a:ext>
-                                            </a:extLst>
-                                        </a:blip>
-                                        <a:srcRect />
-                                        <a:stretch>
-                                            <a:fillRect />
-                                        </a:stretch>
-                                    </pic:blipFill>
-                                    <pic:spPr bwMode="auto">
-                                        <a:xfrm>
-                                            <a:off x="0" y="0" />
-                                            <a:ext cx="5724525" cy="3219450" />
-                                        </a:xfrm>
-                                        <a:prstGeom prst="rect">
-                                            <a:avLst />
-                                        </a:prstGeom>
-                                        <a:noFill />
-                                        <a:ln>
-                                            <a:noFill />
-                                        </a:ln>
-                                    </pic:spPr>
-                                </pic:pic>
-                            </a:graphicData>
-                        </a:graphic>
-                    </wp:inline>
-                </w:drawing>
+                <w:lastRenderedPageBreak />
+                <w:t>Dinsdag</w:t>
             </w:r>
         </w:p>
 
-        <w:p w14:paraId="74758167" w14:textId="79366E68" w:rsidR="00D27C7A" w:rsidRPr="00D27C7A" w:rsidRDefault="00D27C7A">
+        %TEXT_DAY_1%
+
+        <w:p w14:paraId="37A29073" w14:textId="77777777" w:rsidR="007E2299" w:rsidRDefault="007E2299">
+            <w:pPr>
+                <w:rPr>
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
+                    <w:sz w:val="28" />
+                    <w:szCs w:val="28" />
+                </w:rPr>
+            </w:pPr>
+        </w:p>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="Tabelraster" />
+                <w:tblW w:w="0" w:type="auto" />
+                <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1" />
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="9016" />
+            </w:tblGrid>
+
+            %IMAGES_DAY_1%
+
+        </w:tbl>
+        <!-- DAY SEPARATOR -->
+
+        <w:p w14:paraId="5F3E2787" w14:textId="04203A43" w:rsidR="00D27C7A" w:rsidRDefault="00D27C7A" />
+        <w:p w14:paraId="1EC16E4A" w14:textId="77777777" w:rsidR="007E2299" w:rsidRDefault="007E2299" />
+        <w:p w14:paraId="033A5F4B" w14:textId="33E1BF1C" w:rsidR="007E2299" w:rsidRDefault="007E2299" />
+        <w:p w14:paraId="766D736E" w14:textId="77777777" w:rsidR="007E2299" w:rsidRDefault="007E2299">
+            <w:r>
+                <w:br w:type="page" />
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="7CCBF650" w14:textId="38C7CA7F" w:rsidR="007E2299" w:rsidRPr="007E2299" w:rsidRDefault="007E2299" w:rsidP="007E2299">
+            <w:pPr>
+                <w:rPr>
+                    <w:rStyle w:val="Zwaar" />
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
+                    <w:sz w:val="28" />
+                    <w:szCs w:val="28" />
+                </w:rPr>
+            </w:pPr>
             <w:r>
                 <w:rPr>
-                    <w:noProof />
+                    <w:rStyle w:val="Zwaar" />
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
+                    <w:sz w:val="28" />
+                    <w:szCs w:val="28" />
                 </w:rPr>
-                <w:drawing>
-                    <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="6BB99663" wp14:editId="38368AEB">
-                        <wp:extent cx="5724525" cy="3219450" />
-                        <wp:effectExtent l="0" t="0" r="9525" b="0" />
-                        <wp:docPr id="861653068" name="Afbeelding 1" />
-                        <wp:cNvGraphicFramePr>
-                            <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1" />
-                        </wp:cNvGraphicFramePr>
-                        <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
-                            <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                    <pic:nvPicPr>
-                                        <pic:cNvPr id="0" name="Picture 1" />
-                                        <pic:cNvPicPr>
-                                            <a:picLocks noChangeAspect="1" noChangeArrowheads="1" />
-                                        </pic:cNvPicPr>
-                                    </pic:nvPicPr>
-                                    <pic:blipFill>
-                                        <a:blip r:embed="rId14" cstate="print">
-                                            <a:extLst>
-                                                <a:ext uri="{28A0092B-C50C-407E-A947-70E740481C1C}">
-                                                    <a14:useLocalDpi xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" val="0" />
-                                                </a:ext>
-                                            </a:extLst>
-                                        </a:blip>
-                                        <a:srcRect />
-                                        <a:stretch>
-                                            <a:fillRect />
-                                        </a:stretch>
-                                    </pic:blipFill>
-                                    <pic:spPr bwMode="auto">
-                                        <a:xfrm>
-                                            <a:off x="0" y="0" />
-                                            <a:ext cx="5724525" cy="3219450" />
-                                        </a:xfrm>
-                                        <a:prstGeom prst="rect">
-                                            <a:avLst />
-                                        </a:prstGeom>
-                                        <a:noFill />
-                                        <a:ln>
-                                            <a:noFill />
-                                        </a:ln>
-                                    </pic:spPr>
-                                </pic:pic>
-                            </a:graphicData>
-                        </a:graphic>
-                    </wp:inline>
-                </w:drawing>
+                <w:lastRenderedPageBreak />
+                <w:t>Woensdag</w:t>
             </w:r>
         </w:p>
 
-        <w:p w14:paraId="74758167" w14:textId="79366E68" w:rsidR="00D27C7A" w:rsidRPr="00D27C7A" w:rsidRDefault="00D27C7A">
-            <w:r>
+        %TEXT_DAY_2%
+
+        <w:p w14:paraId="37A29073" w14:textId="77777777" w:rsidR="007E2299" w:rsidRDefault="007E2299">
+            <w:pPr>
                 <w:rPr>
-                    <w:noProof />
+                    <w:rFonts w:ascii="Tahoma" w:hAnsi="Tahoma" w:cs="Tahoma" />
+                    <w:sz w:val="28" />
+                    <w:szCs w:val="28" />
                 </w:rPr>
-                <w:drawing>
-                    <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="6BB99663" wp14:editId="38368AEB">
-                        <wp:extent cx="5724525" cy="3219450" />
-                        <wp:effectExtent l="0" t="0" r="9525" b="0" />
-                        <wp:docPr id="861653068" name="Afbeelding 1" />
-                        <wp:cNvGraphicFramePr>
-                            <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1" />
-                        </wp:cNvGraphicFramePr>
-                        <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
-                            <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-                                    <pic:nvPicPr>
-                                        <pic:cNvPr id="0" name="Picture 1" />
-                                        <pic:cNvPicPr>
-                                            <a:picLocks noChangeAspect="1" noChangeArrowheads="1" />
-                                        </pic:cNvPicPr>
-                                    </pic:nvPicPr>
-                                    <pic:blipFill>
-                                        <a:blip r:embed="rId14" cstate="print">
-                                            <a:extLst>
-                                                <a:ext uri="{28A0092B-C50C-407E-A947-70E740481C1C}">
-                                                    <a14:useLocalDpi xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" val="0" />
-                                                </a:ext>
-                                            </a:extLst>
-                                        </a:blip>
-                                        <a:srcRect />
-                                        <a:stretch>
-                                            <a:fillRect />
-                                        </a:stretch>
-                                    </pic:blipFill>
-                                    <pic:spPr bwMode="auto">
-                                        <a:xfrm>
-                                            <a:off x="0" y="0" />
-                                            <a:ext cx="5724525" cy="3219450" />
-                                        </a:xfrm>
-                                        <a:prstGeom prst="rect">
-                                            <a:avLst />
-                                        </a:prstGeom>
-                                        <a:noFill />
-                                        <a:ln>
-                                            <a:noFill />
-                                        </a:ln>
-                                    </pic:spPr>
-                                </pic:pic>
-                            </a:graphicData>
-                        </a:graphic>
-                    </wp:inline>
-                </w:drawing>
-            </w:r>
+            </w:pPr>
         </w:p>
-        <w:sectPr w:rsidR="00D27C7A" w:rsidRPr="00D27C7A" w:rsidSect="000D11EA">
-            <w:pgSz w:w="11906" w:h="16838" />
-            <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0" />
-            <w:cols w:space="708" />
-            <w:docGrid w:linePitch="360" />
-        </w:sectPr>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblStyle w:val="Tabelraster" />
+                <w:tblW w:w="0" w:type="auto" />
+                <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1" />
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="9016" />
+            </w:tblGrid>
+
+            %IMAGES_DAY_2%
+
+        </w:tbl>
+        <!-- DAY SEPARATOR -->
+
+<w:sectPrw:rsidR="002454C4" >
+		<w:pgSzw:h="16838" w:w="11906" >
+</w:pgSz>
+		<w:pgMarw:gutter="0" w:footer="708" w:header="708" w:left="1440" w:bottom="1440" w:right="1440" w:top="1440" >
+</w:pgMar>
+		<w:colsw:space="708" >
+</w:cols>
+		<w:docGridw:linePitch="360" >
+</w:docGrid>
+</w:sectPr>
     </w:body>
 </w:document>

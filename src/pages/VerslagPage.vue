@@ -94,7 +94,7 @@ export default defineComponent({
 
     async doExport() {
       const document = await DocxUtils.generateDocument(this.report);
-      saveAs(document, 'word.zip');
+      saveAs(document, 'word.docx');
     },
 
     async handleFileUpload(index: number, event: Event & { target: HTMLInputElement & EventTarget }) {
