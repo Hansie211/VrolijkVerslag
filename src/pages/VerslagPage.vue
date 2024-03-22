@@ -42,10 +42,11 @@ import { useWeekReportStore } from 'src/stores/weekReport';
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getISOWeek } from 'date-fns';
-import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
-import getEnvironmentProperties from 'src/data/EnvironmentProperties';
-import getApplicationProperties, { getProperty } from 'src/data/ApplicationProperties';
+import { getProperty } from 'src/data/ApplicationProperties';
+import DocxUtils from 'src/libs/docx/DocxUtils';
+import ImageUtils from 'src/libs/files/ImageUtils';
+import FileUtils from 'src/libs/files/FileUtils';
 
 export default defineComponent({
   name: 'VerslagPage',
@@ -92,74 +93,8 @@ export default defineComponent({
     },
 
     async doExport() {
-      const vars: { [key: string]: string | number | Array<string> } = {
-        theme: this.report.theme,
-        weekNumber: getISOWeek(this.report.startDate),
-      };
-
-      for (let i = 0; i < 5; i++) {
-        vars['text_day_' + i] = this.paragraphs(this.report.dayReports[i].description).map((txt) => `<p>${txt}</p>`);
-        vars['img_day_' + i] = this.report.dayReports[i].images.map((img) => `<img src="${img}" />`);
-      }
-
-      let html = require('src/assets/document/report-template.html').default as string;
-      Object.keys(vars).forEach((key) => {
-        const value = vars[key];
-        html = html.replaceAll(`%${key.toUpperCase()}%`, Array.isArray(value) ? value.join('') : value.toString());
-      });
-
-      const zip = new JSZip();
-
-      const files: { [key: string]: string } = {
-        '_rels/.rels': require('src/assets/document/word/_rels/.rels').default as string,
-        'docProps/app.xml': require('src/assets/document/word/docProps/app.xml').default as string,
-        'docProps/core.xml': require('src/assets/document/word/docProps/core.xml').default as string,
-        'word/_rels/document.xml.rels': require('src/assets/document/word/word/_rels/document.xml.rels').default as string,
-        'word/theme/theme1.xml': require('src/assets/document/word/word/theme/theme1.xml').default as string,
-        'word/document.xml': require('src/assets/document/word/word/document.xml').default as string,
-        'word/fontTable.xml': require('src/assets/document/word/word/fontTable.xml').default as string,
-        'word/settings.xml': require('src/assets/document/word/word/settings.xml').default as string,
-        'word/styles.xml': require('src/assets/document/word/word/styles.xml').default as string,
-        'word/webSettings.xml': require('src/assets/document/word/word/webSettings.xml').default as string,
-        '[Content_Types].xml': require('src/assets/document/word/[Content_Types].xml').default as string,
-      };
-
-      const addB64 = (name: string, uri: string) => {
-        const idx = uri.indexOf('base64,') + 'base64,'.length;
-        const content = uri.substring(idx);
-        zip.file(name, content, { base64: true });
-      };
-
-      Object.keys(files).forEach((fname) => {
-        const content = files[fname];
-        zip.file(fname, content);
-      });
-
-      addB64('word/media/image1.jpeg', this.report.dayReports[0].images[0]);
-      addB64('word/media/image2.jpeg', this.report.dayReports[0].images[1]);
-
-      zip.generateAsync({ type: 'blob', compression: 'STORE' }).then(function (content) {
-        // see FileSaver.js
-        saveAs(content, 'word.docx');
-      });
-
-      // html = `To: Example\nSubject: Verslag week ${getISOWeek(this.report.startDate)} - ${this.report.theme}\nX-Unsent: 1\nContent-Type: text/html\n\n` + html;
-
-      // var bl = new Blob([html], { type: 'text/plain' });
-      // var a = document.createElement('a');
-      // a.href = URL.createObjectURL(bl);
-      // a.download = `Verslag week ${getISOWeek(this.report.startDate)} - ${this.report.theme}.eml`;
-      // a.hidden = true;
-      // // a.target = '_blank';
-      // document.body.appendChild(a);
-      // a.click();
-    },
-
-    paragraphs(text: string): string[] {
-      return text
-        .trim()
-        .replace(/\n\s*\n/g, '\n')
-        .split('\n');
+      const document = await DocxUtils.generateDocument(this.report);
+      saveAs(document, 'word.zip');
     },
 
     async handleFileUpload(index: number, event: Event & { target: HTMLInputElement & EventTarget }) {
@@ -176,70 +111,17 @@ export default defineComponent({
       const day = this.report.dayReports[index];
 
       for (let i = 0; i < files.length && day.images.length < this.maxImagesPerDay; i++) {
-        const fileData = await resizeImage(files[i], 1280, 720);
+        const fileData = await ImageUtils.resizeImage(files[i], 1280, 720);
         if (fileData === null) {
-          console.log('Failed', i);
+          console.warn('Cannot resize image');
         }
 
-        day.images.push(await readFile(fileData as Blob));
+        const datauri = await FileUtils.getDataURI(fileData);
+        day.images.push(datauri);
       }
     },
   },
 });
-
-function readFile(file: Blob): Promise<string> {
-  return new Promise((resolv) => {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      resolv(reader.result as string);
-    };
-
-    reader.readAsDataURL(file);
-  });
-}
-
-function resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob | null> {
-  return new Promise((resolve, reject) => {
-    let image = new Image();
-    image.src = URL.createObjectURL(file);
-    image.onload = () => {
-      let width = image.width;
-      let height = image.height;
-
-      if (width <= maxWidth && height <= maxHeight) {
-        resolve(file);
-        return;
-      }
-
-      let newWidth;
-      let newHeight;
-
-      if (width > height) {
-        newHeight = height * (maxWidth / width);
-        newWidth = maxWidth;
-      } else {
-        newWidth = width * (maxHeight / height);
-        newHeight = maxHeight;
-      }
-
-      let canvas = document.createElement('canvas');
-      canvas.width = newWidth;
-      canvas.height = newHeight;
-
-      let context = canvas.getContext('2d');
-      if (context === null) {
-        reject(null);
-        return;
-      }
-
-      context.drawImage(image, 0, 0, newWidth, newHeight);
-
-      canvas.toBlob(resolve, file.type);
-    };
-    image.onerror = reject;
-  });
-}
 </script>
 
 <style>

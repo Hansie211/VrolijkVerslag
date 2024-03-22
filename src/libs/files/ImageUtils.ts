@@ -31,14 +31,12 @@ export default class ImageUtils {
     });
   }
 
-  static async resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
-    const image = await this.loadImage(file);
-
+  static getNewSize(image: HTMLImageElement, maxWidth: number, maxHeight: number): { width: number; height: number } {
     const width = image.width;
     const height = image.height;
 
     if (width <= maxWidth && height <= maxHeight) {
-      return file;
+      return { width, height };
     }
 
     let newWidth;
@@ -52,17 +50,33 @@ export default class ImageUtils {
       newHeight = maxHeight;
     }
 
+    return { width: newWidth, height: newHeight };
+  }
+
+  static async resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<Blob> {
+    const image = await this.loadImage(file);
+
+    const size = this.getNewSize(image, maxWidth, maxHeight);
+
     const canvas = document.createElement('canvas');
-    canvas.width = newWidth;
-    canvas.height = newHeight;
+    canvas.width = maxWidth;
+    canvas.height = maxHeight;
 
     const context = canvas.getContext('2d');
     if (context === null) {
       throw new Error('Cannot create context');
     }
 
-    context.drawImage(image, 0, 0, newWidth, newHeight);
+    const x = (maxWidth - size.width) / 2;
+    const y = (maxHeight - size.height) / 2;
 
-    return await this.getBlob(canvas, file.type);
+    console.log('oW:', image.width, ', oH:', image.height);
+    console.log('nW:', size.width, ', nH:', size.height);
+    console.log('mW:', maxWidth, ', mH:', maxHeight);
+    console.log('x:', x, ', y:', y);
+
+    context.drawImage(image, x, y, size.width, size.height);
+
+    return await this.getBlob(canvas, 'image/png');
   }
 }

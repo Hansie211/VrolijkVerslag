@@ -11,7 +11,7 @@ export default function getApplicationProperties(): ApplicationProperties {
   return PROPERTIES_OBJECT;
 }
 
-export function getProperty<T>(key: keyof ApplicationProperties): string | number | boolean | undefined;
+export function getProperty(key: keyof ApplicationProperties): string | number | boolean | undefined;
 export function getProperty<T extends string | number | boolean>(key: keyof ApplicationProperties, defaultValue: T): T;
 export function getProperty<T>(key: keyof ApplicationProperties, defaultValue?: T): T | undefined {
   const value = PROPERTIES_OBJECT[key];
@@ -22,7 +22,3 @@ export function getProperty<T>(key: keyof ApplicationProperties, defaultValue?: 
 
   return value as T;
 }
-
-// export function getProperty(key: keyof ApplicationProperties, defaultValue: string | number): string | number | boolean {
-//   return PROPERTIES_OBJECT[key];
-// }

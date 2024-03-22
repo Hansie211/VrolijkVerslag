@@ -3,7 +3,7 @@ export default class FileUtils {
     /* */
   }
 
-  static async getDataURI(file: File): Promise<string> {
+  static async getDataURI(file: Blob): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
 
