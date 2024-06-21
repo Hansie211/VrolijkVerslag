@@ -1,28 +1,51 @@
 <template>
-  <q-page padding style="display: flex; justify-content: center; width: 100%">
-    <div style="width: 80%; min-width: 1000px; height: 100%; display: flex; flex-direction: column">
-      <div class="flex row q-pa-sm q-gutter-x-md">
-        <q-btn to="/" icon="home" rounded />
-        <div class="text-h3" style="flex-shrink: 0; flex-grow: 0">
-          <span style="font-size: 0.6em">Week {{ getISOWeek(report.startDate) }}</span> - {{ report.theme }} - <span style="font-size: 0.6em">{{ getWeekDay(currentDay) }}</span>
-          <q-popup-edit v-model="report.theme" buttons v-slot="scope">
-            <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
-          </q-popup-edit>
-        </div>
-        <q-space />
-        <q-btn icon="print" @click="doExport" />
+  <q-page padding style="display: flex; align-items: center; flex-direction: column; width: 100%; position: relative; padding-left: 50px; padding-right: 50px">
+    <div id="page-title-header" style="display: flex; align-items: center; flex-direction: column; width: 100%; position: relative">
+      <div class="text-h3 q-mb-md">
+        Week {{ getISOWeek(report.startDate) }} - {{ report.theme }}
+        <q-popup-edit v-model="report.theme" buttons v-slot="scope">
+          <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
+        </q-popup-edit>
       </div>
 
+      <q-tabs v-model="currentDay" dense active-color="primary" indicator-color="primary" narrow-indicator>
+        <q-tab v-for="(day, dayIndex) in Object.values(report.dayReports)" :key="dayIndex" :name="dayIndex" :label="getWeekDay(dayIndex)" />
+      </q-tabs>
+
+      <q-btn icon="print" @click="doExport" style="position: absolute; right: 10px" size="xl" />
+    </div>
+
+    <q-tab-panels v-model="currentDay" animated style="width: 100%; min-width: 1000px; height: 100%; display: flex; flex-direction: column">
+      <q-tab-panel v-for="(day, dayIndex) in Object.values(report.dayReports)" :key="dayIndex" :name="dayIndex" style="width: 100%; height: 100%; display: flex; flex-direction: column">
+        <form autocorrect="on" autocapitalize="on" autocomplete="off" spellcheck="true" style="height: 100%">
+          <q-input v-model="day.description" type="textarea" debounce="300" style="height: 100%; font-size: 14pt; font-family: Tahoma, sans-serif; line-height: 1.2" input-style="height: 100%" outlined />
+        </form>
+
+        <div class="q-my-md q-px-none q-gutter-x-sm" style="height: 220px; display: flex; flex-wrap: nowrap; white-space: nowrap; overflow-x: auto; align-items: center; gap: 5px; flex-grow: 0; flex-shrink: 0">
+          <div style="width: 200px; height: 200px; border: 1px solid lightgray; display: inline-block; flex-grow: 0; flex-shrink: 0; display: flex; justify-content: center; align-items: center">
+            <input type="file" multiple @change="handleFileUpload(dayIndex, $event)" style="display: none" :id="`fileInput${dayIndex}`" accept="image/*" />
+            <q-btn size="xl" icon="photo_camera" @click="openFileInput(dayIndex)" :disable="day.images.length >= 10" />
+          </div>
+
+          <div v-for="(image, imgIndex) in day.images" :key="image" style="width: 200px; height: 200px; flex-grow: 0; flex-shrink: 0; border: 1px solid lightgray; display: inline-block; position: relative; box-sizing: border-box" class="q-pa-sm">
+            <q-btn icon="delete" size="sm" style="position: absolute; top: 3px; right: 3px" flat round @click="removeImage(day, imgIndex)" />
+            <img :src="image" style="width: 100%; height: 100%; object-fit: contain" />
+          </div>
+        </div>
+      </q-tab-panel>
+    </q-tab-panels>
+    <!--
+    <div style="width: 80%; min-width: 1000px; height: 100%; display: flex; flex-direction: column">
       <q-carousel v-model="currentDay" transition-prev="slide-right" transition-next="slide-left" control-color="primary" class="rounded-borders" arrows style="width: 100%; height: 100%" padding>
         <q-carousel-slide v-for="(day, dayIndex) in Object.values(report.dayReports)" :key="dayIndex" :name="dayIndex" style="width: 100%; height: 100%; display: flex; flex-direction: column">
           <form autocorrect="on" autocapitalize="on" autocomplete="off" spellcheck="true" style="height: 100%">
             <q-input v-model="day.description" type="textarea" debounce="300" style="height: 100%; font-size: 14pt; font-family: Tahoma, sans-serif; line-height: 1.2" input-style="height: 100%" outlined />
           </form>
 
-          <div class="q-my-md q-px-md q-gutter-x-sm" style="height: 200px; display: flex; flex-wrap: nowrap; white-space: nowrap; overflow-x: auto; align-items: center; gap: 5px; flex-grow: 0; flex-shrink: 0">
+          <div class="q-my-md q-px-md q-gutter-x-sm" style="height: 220px; display: flex; flex-wrap: nowrap; white-space: nowrap; overflow-x: auto; align-items: center; gap: 5px; flex-grow: 0; flex-shrink: 0">
             <div style="width: 200px; height: 200px; border: 1px solid lightgray; display: inline-block; flex-grow: 0; flex-shrink: 0; display: flex; justify-content: center; align-items: center">
               <input type="file" multiple @change="handleFileUpload(dayIndex, $event)" style="display: none" :id="`fileInput${dayIndex}`" accept="image/*" />
-              <q-btn label="Afbeelding toevoegen" size="sm" icon="add" @click="openFileInput(dayIndex)" :disable="day.images.length >= 10" />
+              <q-btn size="xl" icon="photo_camera" @click="openFileInput(dayIndex)" :disable="day.images.length >= 10" />
             </div>
 
             <div v-for="(image, imgIndex) in day.images" :key="image" style="width: 200px; height: 200px; flex-grow: 0; flex-shrink: 0; border: 1px solid lightgray; display: inline-block; position: relative; box-sizing: border-box" class="q-pa-sm">
@@ -32,21 +55,42 @@
           </div>
         </q-carousel-slide>
       </q-carousel>
-    </div>
+    </div> -->
   </q-page>
 </template>
 
 <script lang="ts">
-import { DayReport } from 'src/data/models/WeekReport';
+import WeekReport, { DayReport } from 'src/data/models/WeekReport';
 import { useWeekReportStore } from 'src/stores/weekReport';
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getISOWeek } from 'date-fns';
 import { saveAs } from 'file-saver';
 import { getProperty } from 'src/data/ApplicationProperties';
-import DocxUtils from 'src/libs/docx/DocxUtils';
 import ImageUtils from 'src/libs/files/ImageUtils';
 import FileUtils from 'src/libs/files/FileUtils';
+import HTMLTemplate from 'src/libs/templates/HtmlTemplate';
+
+function paragraphs(text: string): string[] {
+  return text
+    .trim()
+    .replace(/\n\s*\n/g, '\n')
+    .split('\n');
+}
+
+function generateTemplates(report: WeekReport) {
+  const templateValues: { [key: string]: string | number | Array<string> } = {
+    theme: report.theme,
+    weekNumber: getISOWeek(report.startDate),
+  };
+
+  for (let i = 0; i < 5; i++) {
+    templateValues['text_day_' + i] = paragraphs(report.dayReports[i].description).map((txt) => `<p>${txt}</p>`);
+    templateValues['img_day_' + i] = report.dayReports[i].images.map((img) => `<img src="${img}" />`);
+  }
+
+  return templateValues;
+}
 
 export default defineComponent({
   name: 'VerslagPage',
@@ -93,8 +137,12 @@ export default defineComponent({
     },
 
     async doExport() {
-      const document = await DocxUtils.generateDocument(this.report);
-      saveAs(document, 'word.docx');
+      const templateValues = generateTemplates(this.report);
+      const html = HTMLTemplate.createTemplate('report', templateValues);
+
+      const blob = new Blob([html], { type: 'text/plain' });
+
+      saveAs(blob, `Verslag week ${getISOWeek(this.report.startDate)}.verslagtemplate`);
     },
 
     async handleFileUpload(index: number, event: Event & { target: HTMLInputElement & EventTarget }) {
@@ -111,13 +159,17 @@ export default defineComponent({
       const day = this.report.dayReports[index];
 
       for (let i = 0; i < files.length && day.images.length < this.maxImagesPerDay; i++) {
-        const fileData = await ImageUtils.resizeImage(files[i], 1280, 720);
-        if (fileData === null) {
-          console.warn('Cannot resize image');
-        }
+        try {
+          const fileData = await ImageUtils.resizeImage(files[i], 1280, 720);
+          if (fileData === null) {
+            console.warn('Cannot resize image');
+          }
 
-        const datauri = await FileUtils.getDataURI(fileData);
-        day.images.push(datauri);
+          const datauri = await FileUtils.getDataURI(fileData);
+          day.images.push(datauri);
+        } catch (e) {
+          console.warn('Cannot process', files[i], e);
+        }
       }
     },
   },

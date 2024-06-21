@@ -36,6 +36,7 @@ export default defineComponent({
     },
     handleReportCreated(report: WeekReport) {
       this.store.addReport(report);
+      this.openReport(report);
     },
   },
 

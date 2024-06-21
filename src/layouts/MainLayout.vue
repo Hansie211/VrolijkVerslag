@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-toolbar-title> {{ APP_TITLE }} </q-toolbar-title>
+        <q-toolbar-title> {{ APP_TITLE }} <q-btn to="/" icon="home" flat /></q-toolbar-title>
 
         <div>{{ APP_VERSION }}</div>
       </q-toolbar>

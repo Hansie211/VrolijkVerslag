@@ -2,20 +2,6 @@
 <html>
   <head>
     <style>
-      @page {
-        size: 210mm 297mm;
-        margin: 16mm;
-      }
-
-      @media print {
-        .a4-page {
-          width: 100%;
-          margin: unset;
-          min-height: unset;
-          padding: unset;
-        }
-      }
-
       body {
         font-family: Tahoma, sans-serif;
         font-size: 18pt;
@@ -50,25 +36,15 @@
       }
 
       body {
-        background-color: lightgray;
         display: flex;
         flex-direction: column;
         align-items: center;
       }
 
-      .a4-page {
-        width: 210mm;
-        min-height: 297mm;
-        padding: 0.6in;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        background-color: white;
-      }
     </style>
     <title>Week %WEEKNUMBER% - %THEME%</title>
   </head>
   <body>
-    <div class="a4-page">
       <h2>Week %WEEKNUMBER% - %THEME%</h2>
 
       <div style="height: 10px"></div>
@@ -76,27 +52,19 @@
       <h3 class="day-title">Maandag</h3>
       <div class="text-box">%TEXT_DAY_0%</div>
       <div class="img-box">%IMG_DAY_0%</div>
-    </div>
 
-    <div class="a4-page">
       <h3 class="day-title">Dinsdag</h3>
       <div class="text-box">%TEXT_DAY_1%</div>
       <div class="img-box">%IMG_DAY_1%</div>
-    </div>
 
-    <div class="a4-page">
       <h3 class="day-title">Woensdag</h3>
       <div class="text-box">%TEXT_DAY_2%</div>
       <div class="img-box">%IMG_DAY_2%</div>
-    </div>
 
-    <div class="a4-page">
       <h3 class="day-title">Donderdag</h3>
       <div class="text-box">%TEXT_DAY_3%</div>
       <div class="img-box">%IMG_DAY_3%</div>
-    </div>
 
-    <div class="a4-page">
       <h3 class="day-title">Vrijdag</h3>
       <div class="text-box">%TEXT_DAY_4%</div>
       <div class="img-box">%IMG_DAY_4%</div>
