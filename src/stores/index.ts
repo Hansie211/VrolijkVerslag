@@ -43,8 +43,5 @@ export default store((/* { ssrContext } */) => {
   });
   pinia.use((context) => installPersistedStatePlugin(context));
 
-  // You can add Pinia plugins here
-  // pinia.use(SomePiniaPlugin)
-
   return pinia;
 });

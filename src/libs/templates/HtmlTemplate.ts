@@ -7,7 +7,7 @@ export default class HTMLTemplate {
     let html = require(`src/assets/document/${templateName}-template.html`).default as string;
     Object.keys(templateValues).forEach((key) => {
       const value = templateValues[key];
-      html = html.replaceAll(`%${key.toUpperCase()}%`, Array.isArray(value) ? value.join('') : (value as object).toString());
+      html = html.replace(`%${key.toUpperCase()}%`, Array.isArray(value) ? value.join('') : (value as object).toString());
     });
 
     return html;

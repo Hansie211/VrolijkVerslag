@@ -7,9 +7,10 @@ export const useWeekReportStore = defineStore(
   () => {
     const weekReports: Ref<WeekReport[]> = ref([]);
 
-    const get = (id: string) => {
-      return weekReports.value.find((report) => report.id === id);
+    const get = (id: string): WeekReport | undefined => {
+      return (weekReports.value as WeekReport[]).find((report) => report.id === id);
     };
+
     const addReport = (report: WeekReport) => weekReports.value.push(report);
     return {
       weekReports,

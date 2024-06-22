@@ -27,35 +27,18 @@
             <q-btn size="xl" icon="photo_camera" @click="openFileInput(dayIndex)" :disable="day.images.length >= 10" />
           </div>
 
-          <div v-for="(image, imgIndex) in day.images" :key="image" style="width: 200px; height: 200px; flex-grow: 0; flex-shrink: 0; border: 1px solid lightgray; display: inline-block; position: relative; box-sizing: border-box" class="q-pa-sm">
+          <div
+            v-for="(image, imgIndex) in day.images"
+            :key="image"
+            style="width: 200px; height: 200px; flex-grow: 0; flex-shrink: 0; border: 1px solid lightgray; display: inline-block; position: relative; box-sizing: border-box"
+            class="q-pa-sm"
+          >
             <q-btn icon="delete" size="sm" style="position: absolute; top: 3px; right: 3px" flat round @click="removeImage(day, imgIndex)" />
             <img :src="image" style="width: 100%; height: 100%; object-fit: contain" />
           </div>
         </div>
       </q-tab-panel>
     </q-tab-panels>
-    <!--
-    <div style="width: 80%; min-width: 1000px; height: 100%; display: flex; flex-direction: column">
-      <q-carousel v-model="currentDay" transition-prev="slide-right" transition-next="slide-left" control-color="primary" class="rounded-borders" arrows style="width: 100%; height: 100%" padding>
-        <q-carousel-slide v-for="(day, dayIndex) in Object.values(report.dayReports)" :key="dayIndex" :name="dayIndex" style="width: 100%; height: 100%; display: flex; flex-direction: column">
-          <form autocorrect="on" autocapitalize="on" autocomplete="off" spellcheck="true" style="height: 100%">
-            <q-input v-model="day.description" type="textarea" debounce="300" style="height: 100%; font-size: 14pt; font-family: Tahoma, sans-serif; line-height: 1.2" input-style="height: 100%" outlined />
-          </form>
-
-          <div class="q-my-md q-px-md q-gutter-x-sm" style="height: 220px; display: flex; flex-wrap: nowrap; white-space: nowrap; overflow-x: auto; align-items: center; gap: 5px; flex-grow: 0; flex-shrink: 0">
-            <div style="width: 200px; height: 200px; border: 1px solid lightgray; display: inline-block; flex-grow: 0; flex-shrink: 0; display: flex; justify-content: center; align-items: center">
-              <input type="file" multiple @change="handleFileUpload(dayIndex, $event)" style="display: none" :id="`fileInput${dayIndex}`" accept="image/*" />
-              <q-btn size="xl" icon="photo_camera" @click="openFileInput(dayIndex)" :disable="day.images.length >= 10" />
-            </div>
-
-            <div v-for="(image, imgIndex) in day.images" :key="image" style="width: 200px; height: 200px; flex-grow: 0; flex-shrink: 0; border: 1px solid lightgray; display: inline-block; position: relative; box-sizing: border-box" class="q-pa-sm">
-              <q-btn icon="delete" size="sm" style="position: absolute; top: 3px; right: 3px" flat round @click="removeImage(day, imgIndex)" />
-              <img :src="image" style="width: 100%; height: 100%; object-fit: contain" />
-            </div>
-          </div>
-        </q-carousel-slide>
-      </q-carousel>
-    </div> -->
   </q-page>
 </template>
 
@@ -100,7 +83,7 @@ export default defineComponent({
     const weekReportStore = useWeekReportStore();
 
     const reportId = route.query['reportId'] as string;
-    const report = weekReportStore.get(reportId);
+    const report = weekReportStore.get(reportId) as WeekReport | undefined;
     if (report === undefined) {
       throw new Error('Report is not found');
     }
@@ -140,8 +123,7 @@ export default defineComponent({
       const templateValues = generateTemplates(this.report);
       const html = HTMLTemplate.createTemplate('report', templateValues);
 
-      const blob = new Blob([html], { type: 'text/plain' });
-
+      const blob = new Blob([html], { type: 'text/html' });
       saveAs(blob, `Verslag week ${getISOWeek(this.report.startDate)}.verslagtemplate`);
     },
 

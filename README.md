@@ -1,6 +1,6 @@
 # Vrolijk Verslag (vrolijkverslag)
 
-Een Vrolijk Verslag
+Vrolijk Verslag
 
 ## Install the dependencies
 ```bash
