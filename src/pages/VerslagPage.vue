@@ -115,7 +115,7 @@ export default defineComponent({
       const html = HTMLTemplate.createTemplate('report', templateValues);
 
       const blob = new Blob([html], { type: 'text/html' });
-      saveAs(blob, `Verslag week ${DateUtils.getWeekNumber(this.report.startDate)}.html`);
+      saveAs(blob, `Verslag week ${DateUtils.getWeekNumber(this.report.startDate)}.verslagtemplate`);
     },
   },
 });
