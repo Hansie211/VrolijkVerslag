@@ -52,7 +52,9 @@ import { saveAs } from 'file-saver';
 import { getProperty } from 'src/data/ApplicationProperties';
 import ImageUtils from 'src/libs/files/ImageUtils';
 import FileUtils from 'src/libs/files/FileUtils';
-import HTMLTemplate from 'src/libs/templates/HtmlTemplate';
+import HTMLTemplate from 'src/libs/HtmlTemplate';
+import ImageDialog from 'src/dialogs/ImageDialog.vue';
+import DialogUtils from 'src/libs/DialogUtils';
 
 function paragraphs(text: string): string[] {
   return text
@@ -108,11 +110,14 @@ export default defineComponent({
       return DAYS[index];
     },
 
-    openFileInput(index: number) {
-      const fileInput = document.querySelector<HTMLInputElement>(`#fileInput${index}`);
-      if (fileInput) {
-        fileInput.click();
-      }
+    async openFileInput(dayIndex: number) {
+      const r = await DialogUtils.showDialog({ component: ImageDialog, componentProps: { report: this.report, dayIndex } });
+      console.log(r);
+
+      // const fileInput = document.querySelector<HTMLInputElement>(`#fileInput${index}`);
+      // if (fileInput) {
+      //   fileInput.click();
+      // }
     },
 
     removeImage(day: DayReport, index: number) {
@@ -124,10 +129,10 @@ export default defineComponent({
       const html = HTMLTemplate.createTemplate('report', templateValues);
 
       const blob = new Blob([html], { type: 'text/html' });
-      saveAs(blob, `Verslag week ${getISOWeek(this.report.startDate)}.verslagtemplate`);
+      saveAs(blob, `Verslag week ${getISOWeek(this.report.startDate)}.html`);
     },
 
-    async handleFileUpload(index: number, event: Event & { target: HTMLInputElement & EventTarget }) {
+    async handleFileUpload(index: number, event: Event & { target: HTMLInputElement }) {
       const files: FileList | null = event.target.files;
 
       // Clear the input
@@ -163,3 +168,4 @@ export default defineComponent({
   height: 100% !important;
 }
 </style>
+src/libs/HtmlTemplate

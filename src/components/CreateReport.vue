@@ -32,8 +32,6 @@ export default defineComponent({
     const startDate: Ref<string> = ref(getLastMonday());
     const isThemeSet = ref(true);
 
-    console.log(startDate.value);
-
     const createReport = () => {
       if (!theme.value) {
         isThemeSet.value = false;
