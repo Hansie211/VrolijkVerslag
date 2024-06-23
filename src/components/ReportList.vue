@@ -17,8 +17,8 @@
 </template>
 
 <script lang="ts">
-import { getISOWeek } from 'date-fns';
 import WeekReport from 'src/data/models/WeekReport';
+import DateUtils from 'src/libs/DateUtils';
 import { PropType, defineComponent } from 'vue';
 
 export default defineComponent({
@@ -30,7 +30,7 @@ export default defineComponent({
   },
   methods: {
     formatDate(date: Date) {
-      const weekNumber = getISOWeek(date);
+      const weekNumber = DateUtils.getWeekNumber(date);
       const dateStr = new Date(date).toLocaleDateString();
       return `Week ${weekNumber}, ${dateStr}`;
     },

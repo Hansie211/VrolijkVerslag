@@ -4,6 +4,12 @@ export class DayReport {
   description = '';
   images: string[] = [];
 }
+
+export class DayImage {
+  image!: string;
+  text = '';
+}
+
 export default class WeekReport {
   theme: string;
   startDate: Date;

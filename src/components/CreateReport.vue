@@ -24,12 +24,13 @@
 
 <script lang="ts">
 import WeekReport from 'src/data/models/WeekReport';
+import DateUtils from 'src/libs/DateUtils';
 import { Ref, defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup(props, { emit }) {
     const theme = ref('');
-    const startDate: Ref<string> = ref(getLastMonday());
+    const startDate: Ref<string> = ref(DateUtils.getLastMonday());
     const isThemeSet = ref(true);
 
     const createReport = () => {
@@ -54,12 +55,4 @@ export default defineComponent({
     };
   },
 });
-
-function getLastMonday(): string {
-  const today = new Date();
-  const dayOfWeek = today.getDay();
-  const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Adjust if Sunday
-  const lastMonday = new Date(today.setDate(diff));
-  return lastMonday.toISOString().slice(0, 10); // Format as 'YYYY-MM-DD'
-}
 </script>
