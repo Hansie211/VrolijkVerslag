@@ -3,6 +3,8 @@ import PropertiesData from 'src/assets/application_properties.json';
 export interface ApplicationProperties {
   title: string;
   maxImagesPerDay: number;
+  maxImageWidth: number;
+  maxImageHeight: number;
 }
 
 const PROPERTIES_OBJECT = PropertiesData as unknown as ApplicationProperties;

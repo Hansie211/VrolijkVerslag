@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import WeekReport from 'src/data/models/WeekReport';
+import WeekReport, { DayImage } from 'src/data/models/WeekReport';
 import { Ref, ref } from 'vue';
 
 export const useWeekReportStore = defineStore(
@@ -21,9 +21,29 @@ export const useWeekReportStore = defineStore(
   {
     persistedState: {
       migrate: (state: { weekReports: WeekReport[] }) => {
-        state.weekReports.forEach((e) => (e.startDate = new Date(e.startDate)));
+        state.weekReports.forEach((e) => patchReport(e));
         return state;
       },
     },
   }
 );
+
+function patchReport(report: WeekReport) {
+
+  report.startDate = new Date(report.startDate);
+
+  Object.keys(report.dayReports).forEach(dayIndex => {
+    const dayReport = report.dayReports[parseInt(dayIndex)];
+    dayReport.images = [...dayReport.images].map(image => {
+      if (typeof image !== 'string') {
+        return image;
+      }
+
+      return { image, text: ''} as DayImage;
+    });
+
+  });
+
+
+
+}

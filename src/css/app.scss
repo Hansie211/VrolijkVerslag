@@ -34,3 +34,7 @@ body {
   width: 100%;
   overflow-y: auto;
 }
+
+.q-dialog__inner--minimized > div {
+  max-width: unset !important;
+}

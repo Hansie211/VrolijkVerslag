@@ -1,4 +1,8 @@
 {
   "title": "Vrolijk Verslag",
-  "maxImagesPerDay": 20
+  "maxImagesPerDay": 20,
+  "imageSize": {
+    "width": 1280,
+    "height": 1280
+  }
 }

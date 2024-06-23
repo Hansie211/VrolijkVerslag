@@ -2,9 +2,13 @@
 <html>
   <head>
     <style>
+
       body {
         font-family: Tahoma, sans-serif;
         font-size: 18pt;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       .day-title:not(:nth-of-type(1)) {
@@ -17,14 +21,14 @@
       }
 
       img {
-        height: 13cm;
-        margin-top: 2mm;
-        margin-bottom: 2mm;
+        height: 12cm;
         object-fit: contain;
+        margin-bottom: 3px;
       }
 
       p,
-      img {
+      img,
+      .img-wrapper {
         page-break-inside: avoid;
         break-inside: avoid;
       }
@@ -33,13 +37,22 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        width: 80%;
       }
 
-      body {
+      .img-wrapper {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        justify-content: center;
+        margin-top: 2mm;
+        margin-bottom: 2mm;
       }
+
+      .img-wrapper > div {
+        font-size: 14pt;
+        text-align: center;
+      }
+
 
     </style>
     <title>Week %WEEKNUMBER% - %THEME%</title>

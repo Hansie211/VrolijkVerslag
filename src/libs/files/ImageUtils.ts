@@ -70,11 +70,6 @@ export default class ImageUtils {
     const x = (maxWidth - size.width) / 2;
     const y = (maxHeight - size.height) / 2;
 
-    console.log('oW:', image.width, ', oH:', image.height);
-    console.log('nW:', size.width, ', nH:', size.height);
-    console.log('mW:', maxWidth, ', mH:', maxHeight);
-    console.log('x:', x, ', y:', y);
-
     context.drawImage(image, x, y, size.width, size.height);
 
     return await this.getBlob(canvas, 'image/png');

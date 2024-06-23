@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 export class DayReport {
   description = '';
-  images: string[] = [];
+  images: DayImage[] = [];
 }
 
 export class DayImage {
